@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+.brief_venv/
+.venv/
+venv/
+XJCO3011_Coursework2_Brief__2025_2026.pdf
+data/*.tmp
