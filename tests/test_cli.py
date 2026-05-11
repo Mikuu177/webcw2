@@ -15,6 +15,7 @@ def test_shell_load_print_find_and_edge_cases(tmp_path):
     assert "Loaded index" in shell.execute("load")
     assert "frequency=1" in shell.execute("print good")
     assert "Found 1 page" in shell.execute("find good friends")
+    assert "TF-IDF" in shell.execute("rank")
     assert "Please provide" in shell.execute("find")
     assert "Unknown command" in shell.execute("dance")
 

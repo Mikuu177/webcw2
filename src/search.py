@@ -58,6 +58,12 @@ class SearchEngine:
             )
         return sorted(results, key=lambda result: (-result.score, result.url))
 
+    def explain_ranking(self) -> str:
+        return (
+            "Ranking uses TF-IDF: term frequency rewards repeated matches on a page, "
+            "while inverse document frequency rewards terms that appear on fewer pages."
+        )
+
     def format_find(self, query: str) -> str:
         terms = tokenize(query)
         if not terms:

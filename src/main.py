@@ -32,6 +32,8 @@ class SearchShell:
             return self.print_word(argument)
         if name == "find":
             return self.find(argument)
+        if name == "rank":
+            return self.explain_ranking()
         if name == "help":
             return self.help()
         if name == "exit":
@@ -63,6 +65,11 @@ class SearchShell:
             return "No index loaded. Run build or load first."
         return SearchEngine(self.index).format_find(argument)
 
+    def explain_ranking(self) -> str:
+        if not self._ensure_index():
+            return "No index loaded. Run build or load first."
+        return SearchEngine(self.index).explain_ranking()
+
     def help(self) -> str:
         return "\n".join(
             [
@@ -71,6 +78,7 @@ class SearchShell:
                 "  load               Load saved index from data/index.json.",
                 "  print <word>       Print inverted index for a word.",
                 "  find <query>       Find pages containing all query terms.",
+                "  rank               Explain the TF-IDF ranking method.",
                 "  help               Show this help message.",
                 "  exit               Exit the shell.",
             ]

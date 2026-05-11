@@ -30,9 +30,22 @@ def test_find_multi_word_query_returns_intersection_sorted_by_score():
     assert results[0].score > 0
 
 
+def test_tfidf_ranking_prefers_higher_term_frequency():
+    results = SearchEngine(make_index()).find("good")
+
+    assert [result.url for result in results][:2] == [
+        "https://example.test/1",
+        "https://example.test/2",
+    ]
+
+
 def test_find_formats_empty_and_unknown_query_gracefully():
     engine = SearchEngine(make_index())
 
     assert "Please provide" in engine.format_find("")
     assert "No pages found" in engine.format_find("frendz")
     assert "Did you mean 'friends'" in engine.format_find("frendz")
+
+
+def test_ranking_explanation_mentions_tfidf():
+    assert "TF-IDF" in SearchEngine(make_index()).explain_ranking()
